@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Aluno, Matricula, Professor, Disciplina, Alocacao
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from .forms import LoginForm
 
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
@@ -23,13 +24,16 @@ def login(request):
     alunos = Aluno.objects.all()
     # print(alunos)
     if request.method == 'POST':
-        print(request.POST)
-        for aluno in alunos:
-            if (aluno.nome == request.POST.nome[0]):# and (aluno.senha == request.POST.senha[0]):
-                messages.success(request, f'Login com sucesso, aluno: {aluno.nome}')
-                return redirect('index')
-            else:
-                return render(request, 'siga/login.html', {'title': "Login", 'errado': True})
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            n = form.cleaned_data.get('aluno_nome')
+            s = form.cleaned_data.get('aluno_senha')
+            print(form, n, s)
+            for aluno in alunos:
+                if (aluno.nome == n) and (aluno.senha == s):
+                    messages.success(request, f'Login com sucesso, aluno: {aluno.nome}')
+                    return redirect('index')
+        return render(request, 'siga/login.html', {'title': "Login", 'errado': True})    
     return render(request, 'siga/login.html', {'title': "Login", 'nome':alunos[0].nome,'senha':alunos[0].senha})
 
 # def login(request):

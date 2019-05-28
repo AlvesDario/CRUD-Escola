@@ -35,10 +35,10 @@
         {% if errado %}
             <p>nome do aluno ou senha errado</p>
         {% endif %}
-        <label for="text" class="sr-only">Nome do Aluno {{nome}}</label>
-        <input name="nome" type="text" id="inputUser" class="form-control" placeholder={{nome}} required autofocus>
+        <label for="text" class="sr-only">Nome do Aluno</label>
+        <input name="aluno_nome" type="text" id="inputUser" class="form-control" placeholder="Nome do aluno" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input name="senha" type="password" id="inputPassword" class="form-control" placeholder={{senha}} required>
+        <input name="aluno_senha" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
         
