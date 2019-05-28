@@ -17,8 +17,10 @@ from .forms import LoginForm
 def index(request):
     return render(request, 'siga/index.html')
 
-def alunos(request):
-    return render(request, 'siga/alunos.html', {'title': "login"})
+def aluno(request, aluno_codigo):
+    alunos = Aluno.objects.all()
+    context = {'title': "login"}
+    return render(request, 'siga/alunos.html', context)
 
 def login(request):
     alunos = Aluno.objects.all()
@@ -32,9 +34,9 @@ def login(request):
             for aluno in alunos:
                 if (aluno.nome == n) and (aluno.senha == s):
                     messages.success(request, f'Login com sucesso, aluno: {aluno.nome}')
-                    return redirect('index')
-        return render(request, 'siga/login.html', {'title': "Login", 'errado': True})    
-    return render(request, 'siga/login.html', {'title': "Login", 'nome':alunos[0].nome,'senha':alunos[0].senha})
+                    return redirect('aluno/1')
+        messages.warning(request, "usuário ou senha inválidos")
+    return render(request, 'siga/login.html', {'title': "Login"})
 
 # def login(request):
 #     return render(request, 'acme/login.html', {'css': 'acme/login.css'})
