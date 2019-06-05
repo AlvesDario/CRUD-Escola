@@ -29,11 +29,9 @@
           </li>
         </ul>
         <span class="navbar-text">
-          <script>
-            localStorage.getItem('loggedIn') === 'true' ?
-              document.write('<a href="logout">Logout</a>'):
-              document.write('<a href="{% url 'login' %}">Login</a>')
-          </script>
+          {% if loggedin %}
+          <a href="{% url 'login' %}" action="logout">Log out</a>
+          {% endif %}
         </span>
       </div>
     </nav>
