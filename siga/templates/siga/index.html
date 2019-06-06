@@ -1,1 +1,22 @@
 {% extends "siga/base.html" %}
+{% block content %}
+<h1>Olá {{ username }}</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Disciplina</th>
+            <th scope="col">Nota</th>
+            <th scope="col">Faltas</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for m in matriculas %}
+        <tr>
+            <td>{{m.disciplina}}</td>
+            <td>{{m.notaf}}</td>
+            <td>{{m.faltas}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
