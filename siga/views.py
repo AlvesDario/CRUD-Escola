@@ -7,6 +7,10 @@ from .forms import LoginForm
 
 # Create your views here.
 # httpresponse should be given as parameters the path to the html file of the page
+def logout(request):
+    request.session.flush()
+    return redirect('login')
+
 def index(request):
     if not request.session.has_key('username'):
         messages.warning(request, "não está logado")
